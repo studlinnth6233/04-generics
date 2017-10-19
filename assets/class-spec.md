@@ -85,7 +85,7 @@ package de.fhro.inf.prg3.a04 {
     }
 
     abstract class PlantUtility {
-	    +{static}splitByColor(PlantBed plantBed): Map<PlantColor,Plant> 
+	    +{static}splitByColor(PlantBed plantBed): Map<PlantColor, SimpleList<Plant>> 
     }
 
 }

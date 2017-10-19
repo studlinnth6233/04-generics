@@ -15,7 +15,7 @@ public abstract class Plant {
 	private final double height;
 	private final String family;
 
-	public Plant(double height, String family) {
+	protected Plant(double height, String family) {
 		this.id = ++InstanceCounter;
 		this.height = height;
 		this.family = family;
