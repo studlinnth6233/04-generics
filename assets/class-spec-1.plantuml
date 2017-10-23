@@ -11,9 +11,7 @@ package java.lang {
     }
 }
 
-package de.fhro.inf.prg3.a04 {
-
-    package de.fhro.inf.prg3.a04.collections {
+package de.fhro.inf.prg3.a04.collections {
         interface SimpleFilter<T> {
             +include(item: T): boolean
         }
@@ -44,5 +42,4 @@ package de.fhro.inf.prg3.a04 {
         SimpleListImpl +-- Element
         Element --* SimpleListImpl
     }
-}
 @enduml

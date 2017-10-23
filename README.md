@@ -53,18 +53,13 @@ To make a class generic, introduce a generic type (typically named `T`) in the c
     _Hint:_ this method aims at the instantiation problem of generics.
 
 
-## Use of Generics
+## Generic Methods
 
 ![class spec 2](assets/class-spec-2.svg)
 
-In the second part we want to use our own generic list by implementing a flower bed which keeps track of all plants in it.
-Additionally we want to implement a short utility method which shows you how to use generics in `static` contexts.
+In the second part we want to focus on generic and `default` methods.
+For this purpose we'll add an additional method `map(...)` and move the method `filter(...)` to the interface `SimpleList`.
 
-1. Implement the two child classes:
-    * `Flower`<br>
-        A flower may have any color except green; make sure to validate this in the constructor.
-    * `Shrub`<br>
-        A shrub is always green; think of it when you implement the `abstract` method `getColor()`.
-2. Implement the class `PlantBed`.
-    Have a look at the given UML to get an idea what this class is for.
-3. Implement the `static` utility method `splitByColor(...)` in an `abstract` utility class `PlantUtility` (can you imagine why this class should be `abstract` and optimally has a `private` constructor?)
+1. Implement the `filter(...)` method as `default` method in the `SimpleList` interface <br>(remember to run the tests when you completed the refactoring to ensure that the result is still the same)
+2. Add the `map(...)` method to the `SimpleList` interface according to the given UML (`default` method)<br>The `map(...)` method transforms every element of your list with the given `Function<T,R>` to another element of Type `R` and collects all elements in a new `SimpleList`.
+3. _Optionally:_ Add the the `sort(...)` as `default` method to the `SimpleList` interface.<br> _You may choose any sort algorithm: Bubblesort, Mergesort,..._
