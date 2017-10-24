@@ -61,5 +61,9 @@ In the second part we want to focus on generic and `default` methods.
 For this purpose we'll add an additional method `map(...)` and move the method `filter(...)` to the interface `SimpleList`.
 
 1. Implement the `filter(...)` method as `default` method in the `SimpleList` interface <br>(remember to run the tests when you completed the refactoring to ensure that the result is still the same)
-2. Add the `map(...)` method to the `SimpleList` interface according to the given UML (`default` method)<br>The `map(...)` method transforms every element of your list with the given `Function<T,R>` to another element of Type `R` and collects all elements in a new `SimpleList`.
-3. _Optionally:_ Add the the `sort(...)` as `default` method to the `SimpleList` interface.<br> _You may choose any sort algorithm: Bubblesort, Mergesort,..._
+2. Add the `map(...)` method to the `SimpleList` interface according to the given UML (`default` method)<br>The `map(...)` method transforms every element of your list with the given `Function<T,R>` to another element of type `R` and collects all elements in a new `SimpleList`.
+3. _Optionally:_ Implement the the `sort(...)` method as `static` utility method in the `abstract` class `CollectionsUtility`.
+    <br> _You may choose any sort algorithm: Bubblesort, Mergesort,...depending on your choice you may need to add some methods to `SimpleList` and `SimpleListImpl`_
+    <br>(can you imagine why this class should be `abstract` and optimally has a `private` constructor?)
+
+**Remember, an untested implementation is worthless! Expand the given test suite to ensure that your algorithms are correct.**

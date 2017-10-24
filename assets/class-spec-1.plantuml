@@ -2,12 +2,12 @@
 package java.lang {
     
     interface Iterable<T> {
-        +Iterator<T> iterator()
+        +iterator(): Iterator<T>
     }
 
     interface Iterator<T> {
-        +boolean hasNext()
-        +T next()
+        +hasNext(): boolean
+        +next(): T
     }
 }
 
@@ -18,7 +18,7 @@ package de.fhro.inf.prg3.a04.collections {
 
         interface SimpleList<T> extends Iterable {
             +add(item: T)
-            +addEmpty()
+            +addDefault()
             +size(): int
             +filter(filter: SimpleFilter<T>): SimpleList
         }
