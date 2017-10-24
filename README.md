@@ -49,7 +49,7 @@ To make a class generic, introduce a generic type (typically named `T`) in the c
     * `Element`
 2. Adopt the changes in the test class `SimpleListTests.java`
 3. Remove the now unnecessary type casts
-4. Add the new method `addEmpty()` in the `SimpleList` interface<br>
+4. Add a new method `addDefault` to the `SimpleList` interface; the purpose is to add a default instance (using the default constructor) to the list<br>
     _Hint:_ this method aims at the instantiation problem of generics.
 
 
