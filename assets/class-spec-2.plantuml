@@ -7,7 +7,7 @@ package java.lang {
     }
 }
 
-package de.fhro.inf.prg3.a04.collections {
+package de.thro.inf.prg3.a04.collections {
     +interface SimpleList<T> extends Iterable {
         +add(item: T)
         +addDefault()
