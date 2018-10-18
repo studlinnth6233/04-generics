@@ -2,7 +2,7 @@ _This is an assignment to the class [Programmieren 3](https://hsro-inf-prg3.gith
 
 # Assignment 4: Generics
 
-![Travis CI](https://travis-ci.org/hsro-inf-prg3/04-generics.svg?branch=master)
+[![Travis CI](https://travis-ci.org/hsro-inf-prg3/04-generics.svg?branch=musterloesung)](https://travis-ci.org/hsro-inf-prg3/04-generics)
 
 In this assignment we want to improve the previously implemented `SimpleListImpl` of [Assignment 2](https://github.com/hsro-inf-prg3/02-classes-interfaces).
 Back then, `SimpleListImpl` was implemented to store references of type `Object`, which in turn required a type cast on retrieval:
