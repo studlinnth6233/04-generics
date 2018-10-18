@@ -1,8 +1,8 @@
-package de.fhro.inf.prg3.a04.tests;
+package de.thro.inf.prg3.a04.tests;
 
-import de.fhro.inf.prg3.a04.collections.SimpleFilter;
-import de.fhro.inf.prg3.a04.collections.SimpleList;
-import de.fhro.inf.prg3.a04.collections.SimpleListImpl;
+import de.thro.inf.prg3.a04.collections.SimpleFilter;
+import de.thro.inf.prg3.a04.collections.SimpleList;
+import de.thro.inf.prg3.a04.collections.SimpleListImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;

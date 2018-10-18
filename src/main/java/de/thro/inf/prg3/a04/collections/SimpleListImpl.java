@@ -1,4 +1,4 @@
-package de.fhro.inf.prg3.a04.collections;
+package de.thro.inf.prg3.a04.collections;
 
 import java.util.Iterator;
 
