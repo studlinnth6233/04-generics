@@ -6,125 +6,124 @@ import java.util.Iterator;
  * @author Peter Kurfer
  * Created on 10/6/17.
  */
-public class SimpleListImpl implements SimpleList {
+public class SimpleListImpl implements SimpleList, Iterable<Object>
+{
+    /**
+     * Inner class for one Element of the List
+     */
+    private static class Element
+    {
+        Object  item;
+        Element next;
 
-	private ListElement head;
-	private int size;
+        /**
+         * Constructor
+         * Sets the item to store in the Element
+         *
+         * @param item The item to store in the Element
+         */
+        Element(Object item)
+        {
+            this.item = item;
+        }
+    }
 
-	public SimpleListImpl() {
-		head = null;
-	}
+    /**
+     * Inner class for the Iterator of the List
+     */
+    private class SimpleIteratorImpl implements Iterator<Object>
+    {
+        Element current = head;
 
-	/**
-	 * Add an object to the end of the list
-	 * @param item item to add
-	 */
-	public void add(Object item){
-		/* special case empty list */
-		if(head == null){
-			head = new ListElement(item);
-		}else {
-			/* any other list length */
-			ListElement current = head;
-			while (current.getNext() != null){
-				current = current.getNext();
-			}
-			current.setNext(new ListElement(item));
-		}
-		size++;
-	}
+        /**
+         * Check if there is one more Element in the List
+         *
+         * @return True / False whether there is one more Element in the List
+         */
+        @Override
+        public boolean hasNext()
+        {
+            return current != null;
+        }
 
-	/**
-	 * @return size of the list
-	 */
-	public int size() {
-		return size;
-	}
+        /**
+         * Return the value of the next Element in the List
+         *
+         * @return Value of next Element
+         */
+        @Override
+        public Object next()
+        {
+            Object value = current.item;
 
-	/**
-	 * Get a new SimpleList instance with all items of this list which match the given filter
-	 * @param filter SimpleFilter instance
-	 * @return new SimpleList instance
-	 */
-	public SimpleList filter(SimpleFilter filter){
-		SimpleList result = new SimpleListImpl();
-		for(Object o : this){
-			if(filter.include(o)){
-				result.add(o);
-			}
-		}
-		return result;
-	}
+            current = current.next;
 
-	/**
-	 * @inheritDoc
-	 */
-	@Override
-	public Iterator<Object> iterator() {
-		return new SimpleIterator();
-	}
+            return value;
+        }
+    }
 
-	/**
-	 * Helper class which implements the Iterator<T> interface
-	 * Has to be non static because otherwise it could not access the head of the list
-	 */
-	private class SimpleIterator implements Iterator<Object> {
+    private Element head;
 
-		private ListElement current = head;
+    /**
+     * Return a new Instance of the Iterator of the List
+     *
+     * @return New Instance of the Iterator
+     */
+    @Override
+    public Iterator<Object> iterator()
+    {
+        return new SimpleIteratorImpl();
+    }
 
-		/**
-		 * @inheritDoc
-		 */
-		@Override
-		public boolean hasNext() {
-			return current != null;
-		}
+    /**
+     * Add a new Element to the back of the List
+     *
+     * @param o The Value to store
+     */
+    @Override
+    public void add(Object o)
+    {
+        Element tail = head;
 
-		/**
-		 * @inheritDoc
-		 */
-		@Override
-		public Object next() {
-			Object tmp = current.getItem();
-			current = current.getNext();
-			return tmp;
-		}
-	}
+        while (tail != null && tail.next != null)
+            tail = tail.next;
 
-	/**
-	 * Helper class for the linked list
-	 * can be static because the ListElement does not need to access the SimpleList instance
-	 */
-	private static class ListElement {
-		private Object item;
-		private ListElement next;
+        if (head == null) head      = new Element(o);
+        else              tail.next = new Element(0);
+    }
 
-		ListElement(Object item) {
-			this.item = item;
-			this.next = null;
-		}
+    /**
+     * Get the size of the List
+     *
+     * @return The size of the List
+     */
+    @Override
+    public int size()
+    {
+        int count = 0;
 
-		/**
-		 * @return get object in the element
-		 */
-		public Object getItem() {
-			return item;
-		}
+        for (Object element : this)
+            count ++;
 
-		/**
-		 * @return successor of the ListElement - may be NULL
-		 */
-		public ListElement getNext() {
-			return next;
-		}
+        return count;
+    }
 
-		/**
-		 * Sets the successor of the ListElement
-		 * @param next ListElement
-		 */
-		public void setNext(ListElement next) {
-			this.next = next;
-		}
-	}
+    /**
+     * Create a new List containing all Elements matching the given Filter
+     *
+     * @param filter The Filter to check
+     *
+     * @return List containing all Elements matching the Filter
+     */
+    @Override
+    public SimpleList filter(SimpleFilter filter)
+    {
+        SimpleList filtered = new SimpleListImpl();
 
+        for (Object element : this)
+            if (filter.include(element))
+                filtered.add(element);
+
+        return filtered;
+    }
 }
