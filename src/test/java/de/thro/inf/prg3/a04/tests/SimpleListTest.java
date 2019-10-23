@@ -1,12 +1,13 @@
 package de.thro.inf.prg3.a04.tests;
 
+import de.thro.inf.prg3.a04.collections.CollectionsUtility;
 import de.thro.inf.prg3.a04.collections.SimpleFilter;
-import de.thro.inf.prg3.a04.collections.SimpleList;
 import de.thro.inf.prg3.a04.collections.SimpleListImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.function.Function;
+import java.util.Comparator;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -87,5 +88,26 @@ public class SimpleListTest
         SimpleListImpl<Float> mapped = (SimpleListImpl<Float>) testList.map(Float::new);
 
         mapped.forEach(element -> assertTrue(element instanceof Float));
+    }
+
+    @Test
+    void testSort()
+    {
+        Comparator<Integer> comparator = (a, b) -> a - b;
+
+        SimpleListImpl<Integer> sorted = (SimpleListImpl<Integer>) CollectionsUtility.sort(testList, comparator);
+
+        Iterator<Integer> iterator = sorted.iterator();
+        Integer prev = iterator.next();
+        Integer next = null;
+
+        while (iterator.hasNext())
+        {
+            next = iterator.next();
+
+            assertTrue(comparator.compare(prev, next) > 0);
+
+            prev = next;
+        }
     }
 }

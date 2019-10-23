@@ -37,6 +37,14 @@ public interface SimpleList<E> extends Iterable<E>
         return filtered;
     }
 
+    /**
+     * Create a new List containing all Elements transformed using the give Function
+     *
+     * @param transform Function specifying the transformation operation
+     * @param <R>       The Type of the Elements after the transformation
+     *
+     * @return List containing transformed Elements
+     */
     default <R> SimpleList<R> map(Function<E, R> transform)
     {
         SimpleList<R> transformed = new SimpleListImpl<>();
@@ -45,5 +53,23 @@ public interface SimpleList<E> extends Iterable<E>
             transformed.add(transform.apply(element));
 
         return transformed;
+    }
+
+    /**
+     * Create a new instance of the List
+     *
+     * @return New instance of the List
+     */
+    default SimpleList<E> newInstance()
+    {
+        try
+        {
+            return this.getClass().newInstance();
+        }
+
+        catch (InstantiationException | IllegalAccessException e)
+        {
+            return new SimpleListImpl<>();
+        }
     }
 }
