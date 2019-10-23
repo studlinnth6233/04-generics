@@ -28,7 +28,7 @@ public interface SimpleList<E> extends Iterable<E>
      */
     default SimpleList<E> filter(SimpleFilter<E> filter)
     {
-        SimpleList<E> filtered = new SimpleListImpl<>();
+        SimpleList<E> filtered = this.newInstance();
 
         for (E element : this)
             if (filter.include(element))
@@ -47,7 +47,7 @@ public interface SimpleList<E> extends Iterable<E>
      */
     default <R> SimpleList<R> map(Function<E, R> transform)
     {
-        SimpleList<R> transformed = new SimpleListImpl<>();
+        SimpleList<R> transformed = this.newInstance();
 
         for (E element : this)
             transformed.add(transform.apply(element));
@@ -60,7 +60,7 @@ public interface SimpleList<E> extends Iterable<E>
      *
      * @return New instance of the List
      */
-    default SimpleList<E> newInstance()
+    default SimpleList newInstance()
     {
         try
         {
@@ -69,7 +69,7 @@ public interface SimpleList<E> extends Iterable<E>
 
         catch (InstantiationException | IllegalAccessException e)
         {
-            return new SimpleListImpl<>();
+            return new SimpleListImpl();
         }
     }
 }

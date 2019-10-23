@@ -85,18 +85,18 @@ public class SimpleListImpl<E> implements SimpleList<E>
     /**
      * Add a new Element to the back of the List
      *
-     * @param o The Value to store
+     * @param e The Value to store
      */
     @Override
-    public void add(E o)
+    public void add(E e)
     {
         Element tail = head;
 
         while (tail != null && tail.next != null)
             tail = tail.next;
 
-        if (head == null) head      = new Element(o);
-        else              tail.next = new Element(o);
+        if (head == null) head      = new Element(e);
+        else              tail.next = new Element(e);
     }
 
     /**
