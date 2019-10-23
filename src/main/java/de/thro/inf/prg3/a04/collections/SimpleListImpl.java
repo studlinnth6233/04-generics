@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @param <E> The generic type for each Element in the List
  */
-public class SimpleListImpl<E> implements SimpleList<E>, Iterable<E>
+public class SimpleListImpl<E> implements SimpleList<E>
 {
     /**
      * Inner class for one Element of the List
@@ -113,24 +113,5 @@ public class SimpleListImpl<E> implements SimpleList<E>, Iterable<E>
             count ++;
 
         return count;
-    }
-
-    /**
-     * Create a new List containing all Elements matching the given Filter
-     *
-     * @param filter The Filter to check
-     *
-     * @return List containing all Elements matching the Filter
-     */
-    @Override
-    public SimpleList<E> filter(SimpleFilter<E> filter)
-    {
-        SimpleList<E> filtered = new SimpleListImpl<>();
-
-        for (E element : this)
-            if (filter.include(element))
-                filtered.add(element);
-
-        return filtered;
     }
 }

@@ -5,7 +5,7 @@ package de.thro.inf.prg3.a04.collections;
  *
  * @param <E> Generic type for each Element of the List
  */
-public interface SimpleList<E>
+public interface SimpleList<E> extends Iterable<E>
 {
     /**
      * Add a given object to the back of the list.
@@ -18,9 +18,20 @@ public interface SimpleList<E>
     int size();
 
     /**
-     * Generate a new list using the given filter instance.
+     * Create a new List containing all Elements matching the given Filter
      *
-     * @return a new, filtered list
+     * @param filter The Filter to check
+     *
+     * @return List containing all Elements matching the Filter
      */
-    SimpleList filter(SimpleFilter<E> filter);
+    default SimpleList<E> filter(SimpleFilter<E> filter)
+    {
+        SimpleList<E> filtered = new SimpleListImpl<>();
+
+        for (E element : this)
+            if (filter.include(element))
+                filtered.add(element);
+
+        return filtered;
+    }
 }
