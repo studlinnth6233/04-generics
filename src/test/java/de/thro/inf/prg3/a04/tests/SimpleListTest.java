@@ -1,9 +1,12 @@
 package de.thro.inf.prg3.a04.tests;
 
 import de.thro.inf.prg3.a04.collections.SimpleFilter;
+import de.thro.inf.prg3.a04.collections.SimpleList;
 import de.thro.inf.prg3.a04.collections.SimpleListImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Function;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -76,5 +79,13 @@ public class SimpleListTest
         SimpleListImpl<Integer> filtered = (SimpleListImpl<Integer>) testList.filter(element -> element > 3);
 
         filtered.forEach(element -> assertTrue(element > 3));
+    }
+
+    @Test
+    void testMap()
+    {
+        SimpleListImpl<Float> mapped = (SimpleListImpl<Float>) testList.map(Float::new);
+
+        mapped.forEach(element -> assertTrue(element instanceof Float));
     }
 }

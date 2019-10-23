@@ -1,5 +1,7 @@
 package de.thro.inf.prg3.a04.collections;
 
+import java.util.function.Function;
+
 /**
  * Interface for a simple List
  *
@@ -33,5 +35,15 @@ public interface SimpleList<E> extends Iterable<E>
                 filtered.add(element);
 
         return filtered;
+    }
+
+    default <R> SimpleList<R> map(Function<E, R> transform)
+    {
+        SimpleList<R> transformed = new SimpleListImpl<>();
+
+        for (E element : this)
+            transformed.add(transform.apply(element));
+
+        return transformed;
     }
 }
