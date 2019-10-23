@@ -6,14 +6,20 @@ import java.util.Iterator;
  * @author Peter Kurfer
  * Created on 10/6/17.
  */
-public class SimpleListImpl implements SimpleList, Iterable<Object>
+
+/**
+ * Simple implementation of a linked List implementing own List Interface
+ *
+ * @param <E> The generic type for each Element in the List
+ */
+public class SimpleListImpl<E> implements SimpleList<E>, Iterable<E>
 {
     /**
      * Inner class for one Element of the List
      */
-    private static class Element
+    private class Element
     {
-        Object  item;
+        E       item;
         Element next;
 
         /**
@@ -22,16 +28,17 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
          *
          * @param item The item to store in the Element
          */
-        Element(Object item)
+        Element(E item)
         {
             this.item = item;
+            this.next = null;
         }
     }
 
     /**
      * Inner class for the Iterator of the List
      */
-    private class SimpleIteratorImpl implements Iterator<Object>
+    private class SimpleIteratorImpl implements Iterator<E>
     {
         Element current = head;
 
@@ -52,9 +59,9 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
          * @return Value of next Element
          */
         @Override
-        public Object next()
+        public E next()
         {
-            Object value = current.item;
+            E value = current.item;
 
             current = current.next;
 
@@ -70,7 +77,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
      * @return New Instance of the Iterator
      */
     @Override
-    public Iterator<Object> iterator()
+    public Iterator<E> iterator()
     {
         return new SimpleIteratorImpl();
     }
@@ -81,7 +88,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
      * @param o The Value to store
      */
     @Override
-    public void add(Object o)
+    public void add(E o)
     {
         Element tail = head;
 
@@ -89,7 +96,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
             tail = tail.next;
 
         if (head == null) head      = new Element(o);
-        else              tail.next = new Element(0);
+        else              tail.next = new Element(o);
     }
 
     /**
@@ -102,7 +109,7 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
     {
         int count = 0;
 
-        for (Object element : this)
+        for (E element : this)
             count ++;
 
         return count;
@@ -116,11 +123,11 @@ public class SimpleListImpl implements SimpleList, Iterable<Object>
      * @return List containing all Elements matching the Filter
      */
     @Override
-    public SimpleList filter(SimpleFilter filter)
+    public SimpleList<E> filter(SimpleFilter<E> filter)
     {
-        SimpleList filtered = new SimpleListImpl();
+        SimpleList<E> filtered = new SimpleListImpl<>();
 
-        for (Object element : this)
+        for (E element : this)
             if (filter.include(element))
                 filtered.add(element);
 

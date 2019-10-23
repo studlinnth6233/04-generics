@@ -14,12 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 public class SimpleListTest
 {
-    private SimpleListImpl testList;
+    private SimpleListImpl<Integer> testList;
 
     @BeforeEach
     void setup()
     {
-        testList = new SimpleListImpl();
+        testList = new SimpleListImpl<>();
 
         testList.add(1);
         testList.add(2);
@@ -32,9 +32,9 @@ public class SimpleListTest
     void testAddElements()
     {
         int counter = 0;
-        for (Object o : testList)
+        for (Integer i : testList)
         {
-            counter++;
+            counter ++;
         }
         assertEquals(5, counter);
     }
@@ -48,39 +48,33 @@ public class SimpleListTest
     @Test
     void testFilterAnonymousClass()
     {
-        SimpleListImpl result = (SimpleListImpl) testList.filter(new SimpleFilter()
+        SimpleListImpl<Integer> result = (SimpleListImpl<Integer>) testList.filter(new SimpleFilter<Integer>()
         {
             @Override
-            public boolean include(Object item)
+            public boolean include(Integer item)
             {
-                int current = (int) item;
-                return current > 2;
+                return item > 2;
             }
         });
 
-        for (Object o : result)
-        {
-            int i = (int) o;
+        for (Integer i : result)
             assertTrue(i > 2);
-        }
     }
 
     @Test
     void testFilterLambda()
     {
-        SimpleListImpl result = (SimpleListImpl) testList.filter(o -> ((int) o) % 2 == 0);
-        for (Object o : result)
-        {
-            int i = (int) o;
+        SimpleListImpl<Integer> result = (SimpleListImpl<Integer>) testList.filter(i -> i % 2 == 0);
+
+        for (Integer i : result)
             assertTrue(i % 2 == 0);
-        }
     }
 
     @Test
     void testFilterThirdNumber()
     {
-        SimpleListImpl filtered = (SimpleListImpl) testList.filter(element -> ((int) element) > 3);
+        SimpleListImpl<Integer> filtered = (SimpleListImpl<Integer>) testList.filter(element -> element > 3);
 
-        filtered.forEach(element -> assertTrue((int) element > 3));
+        filtered.forEach(element -> assertTrue(element > 3));
     }
 }

@@ -1,11 +1,16 @@
 package de.thro.inf.prg3.a04.collections;
 
-public interface SimpleList
+/**
+ * Interface for a simple List
+ *
+ * @param <E> Generic type for each Element of the List
+ */
+public interface SimpleList<E>
 {
     /**
      * Add a given object to the back of the list.
      */
-    void add(Object o);
+    void add(E e);
 
     /**
      * @return current size of the list
@@ -17,5 +22,5 @@ public interface SimpleList
      *
      * @return a new, filtered list
      */
-    SimpleList filter(SimpleFilter filter);
+    SimpleList filter(SimpleFilter<E> filter);
 }
